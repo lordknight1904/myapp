@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux'
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
-import { withStyles } from 'material-ui/styles';
+// import { withStyles } from 'material-ui/styles';
 import AppBar from 'material-ui/AppBar';
 import Toolbar from 'material-ui/Toolbar';
 import Typography from 'material-ui/Typography';
@@ -18,72 +20,78 @@ import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import List, { ListItem, ListItemIcon, ListItemText } from 'material-ui/List';
 import InboxIcon from '@material-ui/icons/Inbox';
 import DraftsIcon from '@material-ui/icons/Drafts';
+import { fetchTitle } from '../../reducers/App/app';
 
-const drawerWidth = 240;
-const styles = theme => ({
-  root: {
-    flexGrow: 1,
-  },
-  flex: {
-    flex: 1,
-  },
-  menuButton: {
-    marginLeft: -12,
-    marginRight: 20,
-  },
-  appBar: {
-    backgroundColor: 'transparent',
-    color: 'white',
-    boxShadow: 'none',
-    transition: theme.transitions.create(['margin', 'width'], {
-      easing: theme.transitions.easing.sharp,
-      duration: theme.transitions.duration.leavingScreen,
-    }),
-  },
-  toolBarScrolled: {
-    minHeight: '35px',
-  },
-  menuButtonScrolled: {
-    height: '35px',
-    webkitTransition: 'height 0.5s',
-    transition: 'height 0.5s',
-  },
-  appBarScrolled: {
-    backgroundColor: '#3f51b5',
-    color: 'black',
-    boxShadow: '0px 2px 4px -1px rgba(0, 0, 0, 0.2), 0px 4px 5px 0px rgba(0, 0, 0, 0.14), 0px 1px 10px 0px rgba(0, 0, 0, 0.12)',
-    webkitTransition: 'backgroundColor 0.5s, box-shadow 0.5s',
-    transition: 'background-color 0.5s, box-shadow 0.5s',
-  },
-  appFrame: {
-    zIndex: 1,
-    overflow: 'hidden',
-    position: 'relative',
-    display: 'flex',
-    width: '100%',
-  },
-  appBarShift: {
-    width: `calc(100% - ${drawerWidth}px)`,
-    transition: theme.transitions.create(['margin', 'width'], {
-      easing: theme.transitions.easing.easeOut,
-      duration: theme.transitions.duration.enteringScreen,
-    }),
-  },
-  'appBarShift-left': {
-    marginLeft: drawerWidth,
-  },
-  drawerHeader: {
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'flex-end',
-    padding: '0 8px',
-    ...theme.mixins.toolbar,
-  },
-  drawerPaper: {
-    position: 'fixed',
-    width: drawerWidth,
-  },
-});
+import './Header.css';
+
+// const drawerWidth = 240;
+// const styles = theme => ({
+//   root: {
+//     flexGrow: 1,
+//   },
+//   flex: {
+//     flex: 1,
+//   },
+//   menuButton: {
+//     marginLeft: -12,
+//     marginRight: 20,
+//   },
+//   hide: {
+//     display: 'none',
+//   },
+//   appBar: {
+//     backgroundColor: 'transparent',
+//     color: 'white',
+//     boxShadow: 'none',
+//     transition: theme.transitions.create(['margin', 'width'], {
+//       easing: theme.transitions.easing.sharp,
+//       duration: theme.transitions.duration.leavingScreen,
+//     }),
+//   },
+//   toolBarScrolled: {
+//     minHeight: '35px',
+//   },
+//   menuButtonScrolled: {
+//     height: '35px',
+//     webkitTransition: 'height 0.5s',
+//     transition: 'height 0.5s',
+//   },
+//   appBarScrolled: {
+//     backgroundColor: '#3f51b5',
+//     color: 'black',
+//     boxShadow: '0px 2px 4px -1px rgba(0, 0, 0, 0.2), 0px 4px 5px 0px rgba(0, 0, 0, 0.14), 0px 1px 10px 0px rgba(0, 0, 0, 0.12)',
+//     webkitTransition: 'backgroundColor 0.5s, box-shadow 0.5s',
+//     transition: 'background-color 0.5s, box-shadow 0.5s',
+//   },
+//   appFrame: {
+//     zIndex: 1,
+//     overflow: 'hidden',
+//     position: 'relative',
+//     display: 'flex',
+//     width: '100%',
+//   },
+//   appBarShift: {
+//     width: `calc(100% - ${drawerWidth}px)`,
+//     transition: theme.transitions.create(['margin', 'width'], {
+//       easing: theme.transitions.easing.easeOut,
+//       duration: theme.transitions.duration.enteringScreen,
+//     }),
+//   },
+//   'appBarShift-left': {
+//     marginLeft: drawerWidth,
+//   },
+//   drawerHeader: {
+//     display: 'flex',
+//     alignItems: 'center',
+//     justifyContent: 'flex-end',
+//     padding: '0 8px',
+//     ...theme.mixins.toolbar,
+//   },
+//   drawerPaper: {
+//     position: 'fixed',
+//     width: drawerWidth,
+//   },
+// });
 
 class Header extends Component {
   constructor(props) {
@@ -125,22 +133,25 @@ class Header extends Component {
   };
 
   render() {
-    const { classes } = this.props;
+    const { app } = this.props;
     const { shrink, open } = this.state;
     return (
-      <div className={`${classes.root} ${classes.appFrame}`}>
+      <div
+        id="appFrame"
+        className="appFrame"
+      >
         <AppBar
           className={
-            classNames(classes.appBar, {
-              [classes.appBarShift]: open,
-              [classes.appBarScrolled]: shrink,
-              [classes['appBarShift-left']]: open,
+            classNames('appBar', {
+              appBarShift: open,
+              appBarScrolled: shrink,
+              appBarShiftLeft: open,
             })}
           position="fixed"
         >
-          <Toolbar className={`${classes.toolBar} ${shrink ? classes.toolBarScrolled : ''}`}>
+          <Toolbar className={`toolBar ${shrink ? 'toolBarScrolled' : ''}`}>
             <IconButton
-              className={`${classes.menuButton} ${shrink ? classes.menuButtonScrolled : ''}`}
+              className={classNames('menuButton', open && 'hide', shrink && 'menuButtonScrolled')}
               color="inherit"
               aria-label="Menu"
               onClick={this.handleDrawerOpen}
@@ -150,11 +161,14 @@ class Header extends Component {
             <Typography
               variant="title"
               color="inherit"
-              className={`${classes.flex}`}
+              className='flex'
             >
-              My App
+              {app.title}
             </Typography>
             <Button color="inherit">Login</Button>
+            {
+              app.side === 'store' ? <Button color="inherit">Cart</Button> : <Button color="inherit">Store</Button>
+            }
           </Toolbar>
         </AppBar>
         <Drawer
@@ -162,10 +176,10 @@ class Header extends Component {
           anchor="left"
           open={open}
           classes={{
-            paper: classes.drawerPaper,
+            paper: 'drawerPaper',
           }}
         >
-          <div className={classes.drawerHeader}>
+          <div className="drawerHeader">
             <IconButton onClick={this.handleDrawerClose}>
               <ChevronLeftIcon />
             </IconButton>
@@ -190,7 +204,11 @@ class Header extends Component {
             <ListItem button>
               <ListItemText primary="Trash" />
             </ListItem>
-            <ListItem button component="a" href="#simple-list">
+            <ListItem
+              button
+              component="a"
+              href="#simple-list"
+            >
               <ListItemText primary="Spam" />
             </ListItem>
           </List>
@@ -200,9 +218,16 @@ class Header extends Component {
   }
 }
 
-Header.propTypes = {
-  classes: PropTypes.object.isRequired,
-  theme: PropTypes.object.isRequired,
-};
+Header.propTypes = {};
 
-export default withStyles(styles, { withTheme: true })(Header);
+const mapStateToProps = ({ app }) => ({
+  app
+});
+const mapDispatchToProps = dispatch =>
+  bindActionCreators(
+    {
+      fetchTitle
+    },
+    dispatch,
+  );
+export default connect(mapStateToProps, mapDispatchToProps)(Header);

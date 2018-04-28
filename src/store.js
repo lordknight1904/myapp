@@ -2,22 +2,22 @@
 import createHistory from 'history/createBrowserHistory';
 
 // import our logger for redux
-import {createLogger} from 'redux-logger';
+import { createLogger } from 'redux-logger';
 
 // import a library to handle async with redux
 import thunk from 'redux-thunk';
 
 // import the redux parts needed to start our store
-import {createStore, applyMiddleware, compose} from 'redux';
+import { createStore, applyMiddleware, compose } from 'redux';
 
 // import the middleware for using react router with redux
-import {routerMiddleware} from 'react-router-redux';
+import { routerMiddleware } from 'react-router-redux';
 
 // import the already combined reducers for redux to use
 import rootReducer from './reducers';
 
 // import moltin API wrapper for use with Redux
-import api from './api/index.js';
+import api from './api/index';
 
 // create and export history for router
 export const history = createHistory();
@@ -26,7 +26,7 @@ export const history = createHistory();
 const middleware = [
   thunk.withExtraArgument(api),
   // thunk,
-  routerMiddleware(history)
+  routerMiddleware(history),
 ];
 
 // declare any enhancers here
@@ -34,7 +34,7 @@ const enhancers = [];
 
 // use Redux devtools if available in development
 if (process.env.NODE_ENV === 'development') {
-  const devToolsExtension = window.devToolsExtension;
+  const { devToolsExtension } = window;
 
   if (typeof devToolsExtension === 'function') {
     enhancers.push(devToolsExtension());
