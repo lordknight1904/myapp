@@ -1,12 +1,12 @@
-
 export const ACTIONS = {
   FETCH_TITLE: 'FETCH_TITLE',
-  SET_SIDE: 'SET_SIDE',
+  SET_PAGE: 'SET_PAGE',
 };
 
 const initialState = {
   title: 'My App2',
-  side: 'store',
+  page: 'store',
+  description: 'description',
 };
 export default (state = initialState, action) => {
   switch (action.type) {
@@ -15,19 +15,19 @@ export default (state = initialState, action) => {
         ...state,
         title: action.title,
       };
-    case ACTIONS.SET_SIDE:
+    case ACTIONS.SET_PAGE:
       return {
         ...state,
-        side: action.side,
+        page: action.page,
       };
     default:
       return { ...state };
   }
 };
 
-export const setPage = (side) => ({
-  type: ACTIONS.SET_SIDE,
-  side
+export const setPage = (page) => ({
+  type: ACTIONS.SET_PAGE,
+  page,
 });
 export const setTitle = () => ({
   type: ACTIONS.FETCH_TITLE,

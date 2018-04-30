@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { bindActionCreators } from 'redux';
-import { connect } from 'react-redux'
+import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 // import { withStyles } from 'material-ui/styles';
@@ -20,7 +20,8 @@ import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import List, { ListItem, ListItemIcon, ListItemText } from 'material-ui/List';
 import InboxIcon from '@material-ui/icons/Inbox';
 import DraftsIcon from '@material-ui/icons/Drafts';
-import { fetchTitle } from '../../reducers/App/app';
+// import ShoppingCart from '@material-ui/icons/ShoppingCart';
+import { fetchTitle, setPage } from '../../reducers/App/app';
 
 import './Header.css';
 
@@ -102,13 +103,11 @@ class Header extends Component {
     };
     this.shrink = false;
   }
-
   componentDidMount() {
     if (window) {
       window.addEventListener('scroll', this.onScroll);
     }
   }
-
   onScroll = (event) => {
     if (window) {
       const document = event.target.documentElement;
@@ -131,6 +130,9 @@ class Header extends Component {
   handleDrawerClose = () => {
     this.setState({ open: false });
   };
+  handleSwitchPage = () => {
+    this.props.setPage(this.props.app.page !== 'cart' ? 'cart' : 'store');
+  };
 
   render() {
     const { app } = this.props;
@@ -142,16 +144,17 @@ class Header extends Component {
       >
         <AppBar
           className={
-            classNames('appBar', {
+            classNames({
               appBarShift: open,
               appBarScrolled: shrink,
+              appBarExpanded: !shrink,
               appBarShiftLeft: open,
             })}
           position="fixed"
         >
-          <Toolbar className={`toolBar ${shrink ? 'toolBarScrolled' : ''}`}>
+          <Toolbar className={`toolBar ${shrink ? 'toolBarScrolled' : 'toolBarExpanded'}`}>
             <IconButton
-              className={classNames('menuButton', open && 'hide', shrink && 'menuButtonScrolled')}
+              className={classNames('menuButton', open && 'hide', shrink && 'menuButtonScrolled', !shrink && 'menuButtonExpanded')}
               color="inherit"
               aria-label="Menu"
               onClick={this.handleDrawerOpen}
@@ -166,9 +169,7 @@ class Header extends Component {
               {app.title}
             </Typography>
             <Button color="inherit">Login</Button>
-            {
-              app.side === 'store' ? <Button color="inherit">Cart</Button> : <Button color="inherit">Store</Button>
-            }
+            <Button color="inherit" onClick={this.handleSwitchPage}>{app.page !== 'cart' ? 'Cart' : 'Store'}</Button>
           </Toolbar>
         </AppBar>
         <Drawer
@@ -187,16 +188,10 @@ class Header extends Component {
           <Divider />
           <List component="nav">
             <ListItem button>
-              <ListItemIcon>
-                <InboxIcon />
-              </ListItemIcon>
-              <ListItemText primary="Inbox" />
+              <ListItemText primary="Product" />
             </ListItem>
             <ListItem button>
-              <ListItemIcon>
-                <DraftsIcon />
-              </ListItemIcon>
-              <ListItemText primary="Drafts" />
+              <ListItemText primary="Sales" />
             </ListItem>
           </List>
           <Divider />
@@ -218,15 +213,19 @@ class Header extends Component {
   }
 }
 
-Header.propTypes = {};
+Header.propTypes = {
+  app: PropTypes.object.isRequired,
+  setPage: PropTypes.func.isRequired,
+};
 
 const mapStateToProps = ({ app }) => ({
-  app
+  app,
 });
 const mapDispatchToProps = dispatch =>
   bindActionCreators(
     {
-      fetchTitle
+      setPage,
+      fetchTitle,
     },
     dispatch,
   );
