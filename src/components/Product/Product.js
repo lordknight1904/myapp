@@ -1,19 +1,25 @@
 import React, { Component } from 'react';
-import Grid from 'material-ui/Grid';
 import { bindActionCreators } from 'redux';
-import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
+// import classNames from 'classnames';
+import Grid from 'material-ui/Grid';
 import logo from '../../logo.svg';
-import '../App.css';
-import Item from '../Item/Item';
 import { fetchTitle, setHelmet } from '../../reducers/App/app';
 
-class Home extends Component {
+// import './Product.css';
+
+class Product extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+    };
+  }
   componentDidMount() {
-    const { app } = this.props;
-    this.props.setHelmet(app.appName, app.appName);
+    this.props.setHelmet('Product', 'Product Page');
   }
   render() {
+    // const { app } = this.props;
     return (
       <div className="App" style={{ marginBottom: '20px' }}>
         <header
@@ -28,17 +34,16 @@ class Home extends Component {
           <h1 className="App-title">Welcome to React</h1>
         </header>
         <h2>
-          Top Choices
+          Product Detail
         </h2>
         <div className="content">
           <Grid container spacing={16}>
-            {
-              [0, 1, 2, 3, 4, 5].map(index => (
-                <Grid key={index} item md={4} sm={6} xs={12}>
-                  <Item />
-                </Grid>
-              ))
-            }
+            <Grid item md sm xs={12}>
+              images
+            </Grid>
+            <Grid item md sm xs={12}>
+              info
+            </Grid>
           </Grid>
         </div>
       </div>
@@ -46,7 +51,7 @@ class Home extends Component {
   }
 }
 
-Home.propTypes = {
+Product.propTypes = {
   app: PropTypes.object.isRequired,
   setHelmet: PropTypes.func.isRequired,
 };
@@ -62,4 +67,4 @@ const mapDispatchToProps = dispatch =>
     },
     dispatch,
   );
-export default connect(mapStateToProps, mapDispatchToProps)(Home);
+export default connect(mapStateToProps, mapDispatchToProps)(Product);

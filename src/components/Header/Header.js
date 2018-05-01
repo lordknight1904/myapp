@@ -3,96 +3,20 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
-// import { withStyles } from 'material-ui/styles';
+import { Link } from 'react-router-dom';
 import AppBar from 'material-ui/AppBar';
 import Toolbar from 'material-ui/Toolbar';
 import Typography from 'material-ui/Typography';
 import Button from 'material-ui/Button';
 import MenuIcon from '@material-ui/icons/Menu';
 import Drawer from 'material-ui/Drawer';
-// import List from 'material-ui/List';
-// import { MenuItem } from 'material-ui/Menu';
-// import MenuIcon from '@material-ui/icons/Menu';
 import Divider from 'material-ui/Divider';
 import IconButton from 'material-ui/IconButton';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
-// import ChevronRightIcon from '@material-ui/icons/ChevronRight';
-import List, { ListItem, ListItemIcon, ListItemText } from 'material-ui/List';
-import InboxIcon from '@material-ui/icons/Inbox';
-import DraftsIcon from '@material-ui/icons/Drafts';
-// import ShoppingCart from '@material-ui/icons/ShoppingCart';
+import List, { ListItem, ListItemText } from 'material-ui/List';
 import { fetchTitle, setPage } from '../../reducers/App/app';
 
 import './Header.css';
-
-// const drawerWidth = 240;
-// const styles = theme => ({
-//   root: {
-//     flexGrow: 1,
-//   },
-//   flex: {
-//     flex: 1,
-//   },
-//   menuButton: {
-//     marginLeft: -12,
-//     marginRight: 20,
-//   },
-//   hide: {
-//     display: 'none',
-//   },
-//   appBar: {
-//     backgroundColor: 'transparent',
-//     color: 'white',
-//     boxShadow: 'none',
-//     transition: theme.transitions.create(['margin', 'width'], {
-//       easing: theme.transitions.easing.sharp,
-//       duration: theme.transitions.duration.leavingScreen,
-//     }),
-//   },
-//   toolBarScrolled: {
-//     minHeight: '35px',
-//   },
-//   menuButtonScrolled: {
-//     height: '35px',
-//     webkitTransition: 'height 0.5s',
-//     transition: 'height 0.5s',
-//   },
-//   appBarScrolled: {
-//     backgroundColor: '#3f51b5',
-//     color: 'black',
-//     boxShadow: '0px 2px 4px -1px rgba(0, 0, 0, 0.2), 0px 4px 5px 0px rgba(0, 0, 0, 0.14), 0px 1px 10px 0px rgba(0, 0, 0, 0.12)',
-//     webkitTransition: 'backgroundColor 0.5s, box-shadow 0.5s',
-//     transition: 'background-color 0.5s, box-shadow 0.5s',
-//   },
-//   appFrame: {
-//     zIndex: 1,
-//     overflow: 'hidden',
-//     position: 'relative',
-//     display: 'flex',
-//     width: '100%',
-//   },
-//   appBarShift: {
-//     width: `calc(100% - ${drawerWidth}px)`,
-//     transition: theme.transitions.create(['margin', 'width'], {
-//       easing: theme.transitions.easing.easeOut,
-//       duration: theme.transitions.duration.enteringScreen,
-//     }),
-//   },
-//   'appBarShift-left': {
-//     marginLeft: drawerWidth,
-//   },
-//   drawerHeader: {
-//     display: 'flex',
-//     alignItems: 'center',
-//     justifyContent: 'flex-end',
-//     padding: '0 8px',
-//     ...theme.mixins.toolbar,
-//   },
-//   drawerPaper: {
-//     position: 'fixed',
-//     width: drawerWidth,
-//   },
-// });
 
 class Header extends Component {
   constructor(props) {
@@ -164,9 +88,18 @@ class Header extends Component {
             <Typography
               variant="title"
               color="inherit"
-              className='flex'
+              className="flex"
             >
-              {app.title}
+              <Link to="/" className="titleLink">
+                {app.appName}
+              </Link>
+            </Typography>
+            <Typography
+              variant="title"
+            >
+              <Link to="/category" className="titleLink">
+                Catergory
+              </Link>
             </Typography>
             <Button color="inherit">Login</Button>
             <Button color="inherit" onClick={this.handleSwitchPage}>{app.page !== 'cart' ? 'Cart' : 'Store'}</Button>

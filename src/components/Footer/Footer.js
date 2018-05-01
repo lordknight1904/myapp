@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import Grid from 'material-ui/Grid';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import TextField from 'material-ui/TextField';
 import { FormGroup, InputGroup, FormControl, Button } from 'react-bootstrap';
 import './Footer.css';
 
@@ -48,7 +47,7 @@ class Footer extends Component {
             sm
             xs={12}
           >
-            <h3>{`@${app.title.replace(/\s/g, '')}`}</h3>
+            <h3>{`@${app.appName.replace(/\s/g, '')}`}</h3>
             <p>Facebook</p>
             <p>Twitter</p>
           </Grid>

@@ -24,6 +24,7 @@
     visibility: hidden;
 }
 .cardContainer:hover {
+    cursor: pointer;
     background-color: rgb(170, 170, 170);
     opacity: 0.6;
 }

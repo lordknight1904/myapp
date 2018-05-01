@@ -1,10 +1,12 @@
 export const ACTIONS = {
   FETCH_TITLE: 'FETCH_TITLE',
   SET_PAGE: 'SET_PAGE',
+  SET_HELMET: 'SET_HELMET',
 };
 
 const initialState = {
-  title: 'My App2',
+  appName: 'My App2',
+  title: 'Home',
   page: 'store',
   description: 'description',
 };
@@ -20,11 +22,22 @@ export default (state = initialState, action) => {
         ...state,
         page: action.page,
       };
+    case ACTIONS.SET_HELMET:
+      return {
+        ...state,
+        title: action.title,
+        description: action.description,
+      };
     default:
       return { ...state };
   }
 };
 
+export const setHelmet = (title, description) => ({
+  type: ACTIONS.SET_HELMET,
+  title,
+  description,
+});
 export const setPage = (page) => ({
   type: ACTIONS.SET_PAGE,
   page,
