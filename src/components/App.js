@@ -6,6 +6,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import Home from './Home/Home';
 import Header from './Header/Header';
+import Footer from './Footer/Footer';
 
 class App extends Component {
   constructor(props) {
@@ -45,6 +46,7 @@ class App extends Component {
             component={Home}
           />
         </Switch>
+        <Footer />
       </div>
     );
   }

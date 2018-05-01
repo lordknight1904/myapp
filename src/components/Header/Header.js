@@ -180,7 +180,7 @@ class Header extends Component {
             paper: 'drawerPaper',
           }}
         >
-          <div className="drawerHeader">
+          <div className={`drawerHeader ${shrink ? 'drawerHeaderScrolled' : 'drawerHeaderExpanded'}`}>
             <IconButton onClick={this.handleDrawerClose}>
               <ChevronLeftIcon />
             </IconButton>
