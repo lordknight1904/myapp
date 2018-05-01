@@ -34,7 +34,7 @@ class Header extends Component {
   }
   onScroll = (event) => {
     if (window) {
-      const document = event.target.documentElement;
+      const document = event.target.scrollingElement;
       const { scrollTop } = document;
       const { innerHeight } = window;
       if (scrollTop > innerHeight) {
@@ -74,7 +74,7 @@ class Header extends Component {
               appBarExpanded: !shrink,
               appBarShiftLeft: open,
             })}
-          position="fixed"
+          position="static"
         >
           <Toolbar className={`toolBar ${shrink ? 'toolBarScrolled' : 'toolBarExpanded'}`}>
             <IconButton
