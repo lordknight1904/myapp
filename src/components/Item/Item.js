@@ -35,7 +35,7 @@ class Item extends Component {
               gutterBottom
               variant="display1"
             >
-              Lizard
+              Clothes
             </Typography>
             <Typography
               align="justify"
