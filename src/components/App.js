@@ -16,39 +16,37 @@ class App extends Component {
 
   render() {
     const { app } = this.props;
-    return (
-      <div>
-        <Helmet
-          key="helmet"
-          title={app.title}
-          titleTemplate=""
-          meta={[
-            { charset: 'utf-8' },
-            {
-              'http-equiv': 'X-UA-Compatible',
-              content: 'IE=edge',
-            },
-            {
-              name: 'viewport',
-              content: 'width=device-width, initial-scale=1',
-            },
-            {
-              name: 'description',
-              content: app.description,
-            },
-          ]}
+    return [
+      <Helmet
+        key="helmet"
+        title={app.title}
+        titleTemplate=""
+        meta={[
+          { charset: 'utf-8' },
+          {
+            'http-equiv': 'X-UA-Compatible',
+            content: 'IE=edge',
+          },
+          {
+            name: 'viewport',
+            content: 'width=device-width, initial-scale=1',
+          },
+          {
+            name: 'description',
+            content: app.description,
+          },
+        ]}
+      />,
+      <Header key="header" />,
+      <Switch key="switch">
+        <Route
+          exact
+          path="/"
+          component={Home}
         />
-        <Header key="header" />
-        <Switch key="switch">
-          <Route
-            exact
-            path="/"
-            component={Home}
-          />
-        </Switch>
-        <Footer />
-      </div>
-    );
+      </Switch>,
+      <Footer key="footer" />,
+    ];
   }
 }
 

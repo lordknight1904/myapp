@@ -1,0 +1,52 @@
+.cardContainer {
+    display: flex;
+    flex-direction: column;
+    position: relative;
+}
+.cardMedia {
+    height: 0;
+    padding-top: 100%;
+}
+.itemContent {
+    bottom: 0;
+    left: 0;
+    position: absolute;
+    right: 0;
+    z-index: 0;
+    visibility: hidden;
+}
+
+.itemContent * {
+    color: white !important;
+    mix-blend-mode: difference !important;
+}
+.cardContainer > .itemContent {
+    visibility: hidden;
+}
+.cardContainer:hover {
+    background-color: rgb(170, 170, 170);
+    opacity: 0.6;
+}
+.cardContainer:hover .itemContent {
+    visibility: visible;
+}
+/*.itemContentBackground {*/
+    /*top: 0;*/
+    /*bottom: 0;*/
+    /*left: 0;*/
+    /*position: absolute;*/
+    /*right: 0;*/
+    /*z-index: 0;*/
+/*}*/
+/*.cardContainer:hover .itemContentBackground {*/
+    /*background-color: rgb(170, 170, 170);*/
+    /*opacity: 0.6;*/
+/*}*/
+/*.itemHide {*/
+    /*display: none;*/
+    /*transition: display 0.5s;*/
+/*}*/
+/*.itemShow {*/
+    /*display: block;*/
+    /*transition: display 0.5s;*/
+/*}*/
