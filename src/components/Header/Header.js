@@ -94,13 +94,6 @@ class Header extends Component {
                 {app.appName}
               </Link>
             </Typography>
-            <Typography
-              variant="title"
-            >
-              <Link to="/category" className="titleLink">
-                Catergory
-              </Link>
-            </Typography>
             <Button color="inherit">Login</Button>
             <Button color="inherit" onClick={this.handleSwitchPage}>{app.page !== 'cart' ? 'Cart' : 'Store'}</Button>
           </Toolbar>
