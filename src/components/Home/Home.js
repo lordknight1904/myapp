@@ -3,7 +3,7 @@ import Grid from 'material-ui/Grid';
 import { bindActionCreators } from 'redux';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import logo from '../../logo.svg';
+import logo from '../../images/banner.jpg';
 import '../App.css';
 import Item from '../Item/Item';
 import { fetchTitle, setHelmet } from '../../reducers/App/app';
@@ -16,17 +16,8 @@ class Home extends Component {
   render() {
     return (
       <div className="App" style={{ marginBottom: '20px' }}>
-        <header
-          className="App-header"
-          style={{ height: '100vh' }}
-        >
-          <img
-            src={logo}
-            className="App-logo"
-            alt="logo"
-          />
-          <h1 className="App-title">Welcome to React</h1>
-        </header>
+        <div className="homeBanner">
+        </div>
         <h2>
           Top Choices
         </h2>
