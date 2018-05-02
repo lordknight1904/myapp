@@ -15,10 +15,6 @@ class Item extends Component {
     this.state = {};
   }
 
-  onClick = () => {
-
-  };
-
   render() {
     return (
       <Link
@@ -27,7 +23,7 @@ class Item extends Component {
         <Card className="cardContainer">
           <CardMedia
             className="cardMedia"
-            image="http://www.justmen.vn/hinh_anh/san_pham/ao-thun-just-men-5-2-2018-4.jpg"
+            image="images/aokhoac.jpg"
           />
           <CardContent className="itemContent">
             <Typography
