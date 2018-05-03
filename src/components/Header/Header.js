@@ -3,7 +3,7 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
-import { Link } from 'react-router-dom';
+import { Link, withRouter } from 'react-router-dom';
 import AppBar from 'material-ui/AppBar';
 import Toolbar from 'material-ui/Toolbar';
 import Typography from 'material-ui/Typography';
@@ -26,18 +26,21 @@ class Header extends Component {
       open: false,
     };
     this.shrink = false;
+    this.pathBool = false;
   }
+
   componentDidMount() {
     if (window) {
       window.addEventListener('scroll', this.onScroll);
     }
   }
+
   onScroll = (event) => {
     if (window) {
       const document = event.target.scrollingElement;
       const { scrollTop } = document;
       const { innerHeight } = window;
-      if (scrollTop > innerHeight) {
+      if (scrollTop > innerHeight * 0.2) {
         if (!this.shrink) {
           this.setState({ shrink: true });
           this.shrink = true;
@@ -60,11 +63,18 @@ class Header extends Component {
 
   render() {
     const { app } = this.props;
-    const { shrink, open } = this.state;
+    const { open } = this.state;
+    let { shrink } = this.state;
+    const { pathname } = this.props.location;
+    const pathBool = pathname === '/' || pathname === '/category';
+    shrink = shrink || !pathBool;
     return (
       <div
         id="appFrame"
-        className="appFrame"
+        className={
+          classNames('appFrame', {
+            // relativePosition: !this.pathBool,
+          })}
       >
         <AppBar
           className={
@@ -76,9 +86,20 @@ class Header extends Component {
             })}
           position="static"
         >
-          <Toolbar className={`toolBar ${shrink ? 'toolBarScrolled' : 'toolBarExpanded'}`}>
+          <Toolbar
+            className={
+              classNames('toolBar', {
+                // toolBarScrolled: shrink,
+                // toolBarExpanded: !shrink,
+              })}
+          >
             <IconButton
-              className={classNames('menuButton', open && 'hide', shrink && 'menuButtonScrolled', !shrink && 'menuButtonExpanded')}
+              className={
+                classNames('menuButton', {
+                  // menuButtonScrolled: shrink,
+                  // menuButtonExpanded: !shrink,
+                  hide: open,
+                })}
               color="inherit"
               aria-label="Menu"
               onClick={this.handleDrawerOpen}
@@ -90,12 +111,20 @@ class Header extends Component {
               color="inherit"
               className="flex"
             >
-              <Link to="/" className="titleLink">
+              <Link
+                to="/"
+                className="titleLink"
+              >
                 {app.appName}
               </Link>
             </Typography>
             <Button color="inherit">Login</Button>
-            <Button color="inherit" onClick={this.handleSwitchPage}>{app.page !== 'cart' ? 'Cart' : 'Store'}</Button>
+            <Button
+              color="inherit"
+              onClick={this.handleSwitchPage}
+            >
+              {app.page !== 'cart' ? 'Cart' : 'Store'}
+            </Button>
           </Toolbar>
         </AppBar>
         <Drawer
@@ -106,7 +135,7 @@ class Header extends Component {
             paper: 'drawerPaper',
           }}
         >
-          <div className={`drawerHeader ${shrink ? 'drawerHeaderScrolled' : 'drawerHeaderExpanded'}`}>
+          <div className="drawerHeader">
             <IconButton onClick={this.handleDrawerClose}>
               <ChevronLeftIcon />
             </IconButton>
@@ -141,6 +170,7 @@ class Header extends Component {
 
 Header.propTypes = {
   app: PropTypes.object.isRequired,
+  location: PropTypes.object.isRequired,
   setPage: PropTypes.func.isRequired,
 };
 
@@ -155,4 +185,4 @@ const mapDispatchToProps = dispatch =>
     },
     dispatch,
   );
-export default connect(mapStateToProps, mapDispatchToProps)(Header);
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Header));

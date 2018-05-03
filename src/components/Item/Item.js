@@ -6,14 +6,26 @@ import { Link } from 'react-router-dom';
 import Card, { CardContent, CardMedia } from 'material-ui/Card';
 import Typography from 'material-ui/Typography';
 import { fetchTitle, setPage } from '../../reducers/App/app';
-
 import './Item.css';
 
 class Item extends Component {
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state = {
+      url: '',
+    };
   }
+
+
+  componentDidMount() {
+    // this.getData();
+  }
+
+  getData = () => {
+    setTimeout(() => {
+      this.setState({ url: 'images/aokhoac.jpg' });
+    }, 1000);
+  };
 
   render() {
     return (
@@ -23,7 +35,7 @@ class Item extends Component {
         <Card className="cardContainer">
           <CardMedia
             className="cardMedia"
-            image="images/aokhoac.jpg"
+            image='images/aokhoac.jpg'
           />
           <CardContent className="itemContent">
             <Typography

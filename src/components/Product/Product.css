@@ -1,0 +1,96 @@
+.productCard {
+    padding-top: 100%;
+}
+.productActions > button {
+    margin: 0 10px;
+}
+.productImage {
+    border-radius: 0;
+}
+.productImageHighlight > span {
+    border: 1px solid grey;
+    height: 47px;
+    width: 47px;
+}
+.productPaper {
+    padding: 0 16px;
+    height: 100%;
+    /*margin-bottom: -10px;*/
+}
+.productPaperMargin {
+    margin-top: 10px !important;
+}
+.productPaperPadding {
+    padding-top: 16px !important;
+}
+.productDetailPanels {
+    margin-top: 20px !important;
+}
+.productQuantity {
+    text-align: left;
+    margin-top: 20px;
+}
+.productQuantity > * {
+    min-width: 40px !important;
+    width: 40px !important;
+    height: 40px;
+}
+.productQuantity > div {
+    display: inline-block;
+    text-align: center;
+    vertical-align: middle;
+    background-color: #f0f0f0;
+}
+.productQuantity > div > p {
+    height: 40px;
+    width: 40px !important;
+    text-align: center;
+    display: table-cell;
+    vertical-align: middle;
+}
+.productQuantity > button {
+    color: white;
+    background-color: #9f9fae;
+    border: 3px solid #9f9fae;
+}
+.productQuantity > button:hover {
+    color: #9f9fae;
+    background-color: white;
+    border: 3px solid #9f9fae;
+}
+
+.productQuantity > button:first-child {
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+}
+.productQuantity > button:last-child {
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+}
+
+.productDetailPaper {
+    padding: 0 16px;
+    height: 100%;
+}
+.productDetailPaper > h3 {
+    padding-top: 16px;
+}
+.productTable td {
+    padding-left: 0;
+    width: 50px;
+}
+.productTable tr:last-child > td {
+    border: none;
+}
+.productAddToCardButton {
+    background-color: #f50057 !important;
+    color: white !important;
+    display: block !important;
+    margin-top: 20px !important;
+    margin-bottom: 20px !important;
+}
+.productAddToCardButton:hover {
+    background-color: rgba(245, 0, 87, 0.08) !important;
+}
+/* rgba(245, 0, 87, 0.08) */
+/* #f50057 */
