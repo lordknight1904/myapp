@@ -4,8 +4,8 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import Grid from 'material-ui/Grid';
 import Paper from 'material-ui/Paper';
-import Card, { CardActions, CardContent, CardMedia } from 'material-ui/Card';
-import Table, { TableBody, TableCell, TableHead, TableRow } from 'material-ui/Table';
+import Card, { CardActions, CardMedia } from 'material-ui/Card';
+import Table, { TableBody, TableCell, TableRow } from 'material-ui/Table';
 import IconButton from 'material-ui/IconButton';
 import Button from 'material-ui/Button';
 import KeyboardArrowLeft from '@material-ui/icons/KeyboardArrowLeft';
@@ -25,6 +25,9 @@ class Product extends Component {
   componentDidMount() {
     this.props.setHelmet('Product', 'Product Page');
     this.init();
+    if (window) {
+      window.scrollTo(0, 0);
+    }
   }
   init = () => {
     this.setState({ selectedSrc: 'images/aokhoac.jpg' });
@@ -115,7 +118,7 @@ class Product extends Component {
           </Grid>
           <Grid className="productDetailPanels" container spacing={40}>
             <Grid item md sm xs={12}>
-              <Paper elevation={4} className="productDetailPaper">
+              <Paper elevation={2} className="productDetailPaper">
                 <Typography align="left" variant="headline" component="h3">
                   PRODUCT DETAILS
                 </Typography>
@@ -154,7 +157,7 @@ class Product extends Component {
               </Paper>
             </Grid>
             <Grid item md sm xs={12}>
-              <Paper elevation={4} className="productDetailPaper">
+              <Paper elevation={2} className="productDetailPaper">
                 <Typography align="left" variant="headline" component="h3">
                   DIMENSIONS (CM)
                 </Typography>
@@ -177,7 +180,7 @@ class Product extends Component {
               </Paper>
             </Grid>
             <Grid item md sm xs={12}>
-              <Paper elevation={4} className="productDetailPaper">
+              <Paper elevation={2} className="productDetailPaper">
                 <Typography align="left" variant="headline" component="h3">
                   DELIVERY & RETURNS
                 </Typography>
